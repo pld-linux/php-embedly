@@ -1,4 +1,6 @@
 %define		plugin embedly
+%define		php_min_version 5.0.0
+%include	/usr/lib/rpm/macros.php
 Summary:	Embed.ly PHP API
 Name:		php-%{plugin}
 Version:	0.3.0
@@ -11,9 +13,10 @@ Patch0:		php52.patch
 URL:		http://embed.ly/docs
 BuildRequires:	/usr/bin/php
 BuildRequires:	rpmbuild(macros) > 1.268
-Requires:	php-common
+Requires:	php-common >= 4:%{php_min_version}
 Requires:	php-curl
 Requires:	php-json
+Requires:	php-pcre
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -37,12 +40,16 @@ php -l src/Embedly/Embedly.php
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{php_data_dir}/Embedly
+install -d $RPM_BUILD_ROOT{%{php_data_dir}/Embedly,%{_examplesdir}/%{name}-%{version}}
 cp -p src/Embedly/Embedly.php $RPM_BUILD_ROOT%{php_data_dir}/Embedly
+
+cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc README.rst MIT-LICENSE
 %{php_data_dir}/Embedly
+%{_examplesdir}/%{name}-%{version}
