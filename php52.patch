@@ -1,0 +1,31 @@
+--- php-embedly-0.3.0/src/Embedly/Embedly.orig.php	2011-07-28 13:06:55.917396407 +0300
++++ php-embedly-0.3.0/src/Embedly/Embedly.php	2011-07-28 13:13:54.775979760 +0300
+@@ -1,6 +1,6 @@
+ <?php
+ 
+-namespace Embedly;
++// namespace Embedly;
+ 
+ /**
+  *
+@@ -227,7 +227,10 @@
+                 sprintf('User-Agent: %s', $this->user_agent)
+             ));
+             $res = $this->curlExec($ch);
+-            $result = json_decode($res) ?: array();
++            $result = json_decode($res, true);
++            if (!is_array($result)) {
++                $result = array();
++            }
+         }
+         $merged_result = array();
+         foreach ($result as $i => $v) {
+@@ -334,7 +337,7 @@
+      * @param stdClass $o
+      * @return string
+      */
+-    public static function reg_imploder(\stdClass $o) 
++    public static function reg_imploder(stdClass $o) 
+     {
+         return implode('|', array_map(array(__CLASS__, 'reg_delim_stripper'), $o->regex));
+     }
