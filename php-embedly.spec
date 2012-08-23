@@ -4,7 +4,7 @@
 Summary:	Embed.ly PHP API
 Name:		php-%{plugin}
 Version:	0.3.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		Development/Languages/PHP
 Source0:	https://github.com/embedly/embedly-php/tarball/v0.3.0#/%{plugin}-%{version}.tgz
@@ -13,10 +13,10 @@ Patch0:		php52.patch
 URL:		http://embed.ly/docs
 BuildRequires:	/usr/bin/php
 BuildRequires:	rpmbuild(macros) > 1.268
+Requires:	php(core) >= %{php_min_version}
 Requires:	php(curl)
 Requires:	php(json)
 Requires:	php(pcre)
-Requires:	php-common >= 4:%{php_min_version}
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
