@@ -1,6 +1,5 @@
 %define		plugin embedly
 %define		php_min_version 5.0.0
-%include	/usr/lib/rpm/macros.php
 Summary:	Embed.ly PHP API
 Name:		php-%{plugin}
 Version:	0.3.0
